@@ -1,179 +1,122 @@
 <!DOCTYPE html>
-<html lang="fr"><head><meta charset="utf-8">
+<html lang="fr">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Maison Naël – La Carte</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<title>Maison Naël – Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f8f3e9;--card:#fffdf8;--ink:#23211c;--mute:#7a7364;--gold:#b98a2a;--olive:#7a8458;--line:#e6dcc6;--sand:#efe5d0;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{background:var(--bg);color:var(--ink);font-family:Jost,system-ui,sans-serif;font-weight:300;overflow-x:hidden}
-.serif,h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600}
-/* INTRO */
-#intro{position:fixed;inset:0;z-index:50;display:flex;cursor:pointer}
-.door{position:relative;width:50%;height:100%;background:var(--bg);display:flex;align-items:center;transition:transform 3s cubic-bezier(.77,0,.18,1)}
-.door.l{justify-content:flex-end}.door.r{justify-content:flex-start}
-.door img{height:52vh;max-height:430px;width:auto;filter:drop-shadow(0 14px 14px #0002);animation:bow 3.2s ease-in-out infinite;transition:transform 1.5s cubic-bezier(.77,0,.18,1)}
-.door.l img{margin-right:-4px;transform:translateX(0)}
-.door.r img{margin-left:-4px;}
-/* LUSTRE MAISON NAËL */
+:root{--ink:#131313;--paper:#faf8f3;--sun:#e3b02a;--lw:min(80vw,640px);--ease:cubic-bezier(.65,0,.25,1)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--ink);color:var(--ink);font-family:'Jost',system-ui,sans-serif;font-weight:300}
+.stage{position:fixed;inset:0;perspective:1800px;overflow:hidden}
+.room{position:absolute;inset:0;z-index:1;background:linear-gradient(#f0e4c6,var(--paper) 260px)}
+.menu{position:absolute;inset:0;overflow-y:hidden}
+.open .menu{overflow-y:auto}
+.inner{max-width:680px;margin:0 auto;padding:calc(30px + env(safe-area-inset-top,0px)) 26px calc(72px + env(safe-area-inset-bottom,0px))}
+.brand{text-align:center}
+.brand svg{width:54px;height:auto;display:block;margin:0 auto 10px}
+.brand b{display:block;font:500 1.9rem/1 'Cormorant Garamond',serif;letter-spacing:.2em;padding-left:.2em}
+.brand small{display:block;margin-top:8px;font-size:.68rem;letter-spacing:.32em;padding-left:.32em;color:#555}
+.tabs{position:sticky;top:0;z-index:2;display:flex;justify-content:center;gap:clamp(18px,5vw,40px);margin:22px -26px 0;padding:12px 26px 0;background:linear-gradient(var(--paper) 85%,#faf8f300)}
+.tabs button{background:none;border:0;padding:4px 2px 9px;font:500 1.3rem/1 'Cormorant Garamond',serif;color:#777;cursor:pointer;border-bottom:2px solid transparent}
+.tabs button[aria-selected=true]{color:var(--ink);border-color:var(--sun)}
+.tabs button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+h1{font:500 1.35rem/1.2 'Jost',sans-serif;letter-spacing:.24em;text-transform:uppercase;text-align:center;margin:2.4rem 0 0;padding-left:.24em}
+.sub{text-align:center;margin:.55rem 0 0;font-size:.78rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase}
+.note{text-align:center;margin:1.2rem auto 0;max-width:46ch;font:italic 400 1.1rem/1.5 'Cormorant Garamond',serif;color:#444}
+h2{font:500 .8rem/1.2 'Jost',sans-serif;letter-spacing:.2em;text-transform:uppercase;margin:3rem 0 .5rem;padding-bottom:.65rem;border-bottom:3px solid var(--sun);width:fit-content;padding-right:2rem}
+.panel>.it:first-of-type{margin-top:1.4rem}
+.it{display:grid;grid-template-columns:1fr auto;column-gap:1.2rem;align-items:baseline;padding:.8rem 0;border-bottom:1px solid #1313131c}
+.it b{font:600 1.3rem/1.25 'Cormorant Garamond',serif}
+.it span{font:500 .98rem/1 'Jost',sans-serif;white-space:nowrap}
+.it p{grid-column:1;margin:.25rem 0 0;font:italic 400 1rem/1.45 'Cormorant Garamond',serif;color:#4a4a4a}
+.foot{margin-top:3.4rem;text-align:center;font:italic 400 1.2rem/1.5 'Cormorant Garamond',serif}
+.foot small{display:block;margin-top:.7rem;font:300 .8rem 'Jost',sans-serif;letter-spacing:.14em;color:#555}
 
-.lampes {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 30vh;
-    display: flex;
-    z-index: 3;
-    pointer-events: none;
+.door{position:absolute;top:0;bottom:0;width:50.1%;z-index:3;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform 2.5s var(--ease);
+background:repeating-linear-gradient(0deg,#0000 0 9px,rgb(255 255 255/.04) 9px 10px),repeating-linear-gradient(90deg,#0000 0 22px,rgb(255 255 255/.03) 22px 23px),linear-gradient(90deg,#101010,#1d1d1d 55%,#101010);box-shadow:inset 0 0 120px rgb(0 0 0/.6)}
+.door::before,.door::after{content:"";position:absolute;border:1px solid rgb(227 176 42/.7)}
+.door::before{inset:7% 9% 8%}
+.door::after{inset:calc(7% + 12px) calc(9% + 12px) calc(8% + 12px);border-color:rgb(250 248 243/.2)}
+.l{left:0;transform-origin:left center}
+.r{right:0;transform-origin:right center}
+.door i{position:absolute;top:46%;height:96px;width:5px;border-radius:3px;background:linear-gradient(90deg,#b98a14,var(--sun),#b98a14);box-shadow:0 0 8px rgb(0 0 0/.5)}
+.l i{right:20px}.r i{left:20px}
+.open .l{transform:rotateY(98deg)}
+.open .r{transform:rotateY(-98deg)}
+.glow{position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(55% 50% at 50% 0,rgb(255 226 160/.3),#0000 72%);mix-blend-mode:screen;transition:opacity 1.2s}
+.open .glow{opacity:0}
+.lamp{position:absolute;top:0;left:50%;width:var(--lw);transform:translateX(-50%);z-index:5;pointer-events:none;filter:drop-shadow(0 18px 40px rgb(255 224 170/.3));transition:opacity 1.3s ease .2s,transform 2s var(--ease) .1s}
+.open .lamp{opacity:0;transform:translate(-50%,-70%)}
+
+.fig{position:absolute;bottom:0;z-index:6;pointer-events:none;filter:drop-shadow(0 20px 18px rgb(0 0 0/.35));transition:left 2.2s var(--ease) .2s,transform 2.2s var(--ease) .2s,height 2.2s var(--ease) .2s,opacity 1.2s ease .2s}
+.mo{--h:min(58vh,540px,70vw);height:var(--h);left:calc(50% - 1.2vw);transform:translateX(-100%)}
+.ma{--h:min(55.3vh,515px,67vw);height:var(--h);left:calc(50% + 1.2vw)}
+.open .fig{opacity:0}
+.open .mo{transform:translateX(-100%) translateY(5vh)}
+.open .ma{transform:translateY(5vh)}
+@media (min-width:1180px){
+.open .fig{opacity:1}
+.open .mo{left:2.5vw;transform:none;height:min(40vh,370px)}
+.open .ma{left:calc(100% - 2.5vw);transform:translateX(-100%);height:min(38vh,350px)}
 }
 
-.lampe {
-    position: relative;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
+.enter{position:absolute;z-index:7;top:calc(18px + env(safe-area-inset-top,0px));right:20px;background:none;border:0;color:var(--paper);font:italic 400 1.15rem 'Cormorant Garamond',serif;letter-spacing:.04em;padding:6px 2px;cursor:pointer}
+.enter::after{content:"";position:absolute;left:0;bottom:2px;height:1px;width:0;background:var(--sun);animation:fill 5s linear forwards}
+@keyframes fill{to{width:100%}}
+.enter:focus-visible{outline:1px solid var(--sun);outline-offset:4px}
+.open .enter{opacity:0;pointer-events:none;transition:opacity .4s}
+@media (prefers-reduced-motion:reduce){.door,.lamp,.fig{transition-duration:.01s;transition-delay:0s}.enter::after{animation:none}}
+</style>
+</head>
+<body>
+<main class="stage" id="st">
+  <section class="room"><div class="menu" id="mn"><div class="inner">
+    <header class="brand">
+      <svg viewBox="0 0 76 68" fill="none" stroke="#131313" stroke-width="1.6" aria-hidden="true"><path d="M2 66V4l34 36L72 2"/><path d="M34 60l36-26v32"/></svg>
+      <b>MAISON NAËL</b><small>Patisserie Fine</small>
+    </header>
+    <nav class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-t="brunch">Brunch</button>
+      <button role="tab" aria-selected="false" data-t="pouce">Sur le pouce</button>
+      <button role="tab" aria-selected="false" data-t="boissons">Boissons</button>
+    </nav>
+    <section class="panel" id="p-brunch" role="tabpanel"><h1>Brunch</h1><p class="sub">Servi de 08h00 à 15h00</p><p class="note">Tous nos plats sont accompagnés d’une salade fraîche de saison et de pommes de terre frites aux herbes selon la recette.</p><div class="it"><b>Benedict Saumon Fumé</b><span>24 DT</span><p>Brioche toastée, œuf mollet, saumon fumé, sauce hollandaise, pickles d’oignon.</p></div><div class="it"><b>Benedict Bresaola</b><span>24 DT</span><p>Brioche toastée, œuf mollet, bresaola, sauce hollandaise, pickles d’oignon.</p></div><div class="it"><b>Omelette Gourmet</b><span>16 DT</span><p>Œufs, champignons de Paris, fromage fondant.</p></div><div class="it"><b>Croque Monsieur Truffe</b><span>18 DT</span><p>Pain brioché, jambon de poulet fumé, béchamel truffée, fromage gratiné.</p></div><div class="it"><b>Burrata Toast Signature</b><span>24 DT</span><p>Burrata crémeuse, tomates rôties, pesto basilic, anchoïade.</p></div><div class="it"><b>Tartine Méditerranéenne</b><span>18 DT</span><p>Labneh, légumes grillés, œuf mollet, pesto basilic, pickles d’oignon.</p></div><div class="it"><b>Gaufre Rösti Poulet Crispy</b><span>20 DT</span><p>Gaufre de pomme de terre, poulet croustillant, crème citronnée, miel épicé.</p></div><div class="it"><b>Salade César Croustillante</b><span>19 DT</span><p>Laitue romaine, poulet croustillant, tomates cerises, parmesan, œuf, sauce César.</p></div><div class="it"><b>Tuna Bowl</b><span>22 DT</span><p>Thon, avocat, œuf, légumes croquants, olives.</p></div><div class="it"><b>Pain Perdu Vanille Caramel</b><span>20 DT</span><p>Pain brioché, glace vanille, caramel beurre salé.</p></div><div class="it"><b>Pain Perdu Framboise Pistache</b><span>24 DT</span><p>Pain brioché, coulis de framboise, glace pistache.</p></div></section><section class="panel" id="p-pouce" role="tabpanel" hidden><h1>Sur le pouce</h1><p class="note">Tous nos plats sont accompagnés d’une salade fraîche de saison et de pommes de terre frites aux herbes selon la recette.</p><div class="it"><b>Salade César Croustillante</b><span>19 DT</span><p>Laitue romaine, poulet croustillant, tomates cerises, parmesan, œuf, sauce César.</p></div><div class="it"><b>Tuna Bowl</b><span>22 DT</span><p>Thon, avocat, œuf, légumes croquants, olives.</p></div><div class="it"><b>Salade Estivale</b><span>20 DT</span><p>Quinoa croustillant, boulgour, poulet rôti, légumes de saison, vinaigrette miel-moutarde.</p></div><div class="it"><b>Burrata Toast Signature</b><span>24 DT</span><p>Burrata crémeuse, tomates rôties, pesto basilic, anchoïade.</p></div><div class="it"><b>Tartine Méditerranéenne</b><span>18 DT</span><p>Labneh, légumes grillés, œuf mollet, pesto basilic, pickles d’oignon.</p></div><div class="it"><b>Focaccia Pesche</b><span>22 DT</span><p>Tartare de poisson, mayonnaise citronnée, laitue romaine, oignon.</p></div><div class="it"><b>Focaccia Bresaola</b><span>30 DT</span><p>Bresaola, stracciatella, tomate, mayonnaise, pesto basilic, Grana Padano.</p></div><div class="it"><b>Cubano Chicken Sandwich</b><span>22 DT</span><p>Poulet rôti, jambon aux herbes, fromage fondant, pickles maison, mojo rojo fumé.</p></div><div class="it"><b>Pain Perdu Vanille Caramel</b><span>20 DT</span><p>Pain brioché, glace vanille, caramel beurre salé.</p></div><div class="it"><b>Pain Perdu Framboise Pistache</b><span>24 DT</span><p>Pain brioché, coulis de framboise, glace pistache.</p></div></section><section class="panel" id="p-boissons" role="tabpanel" hidden><h1>Boissons</h1><h2>Boissons chaudes</h2><div class="it"><b>Espresso</b><span>6</span></div><div class="it"><b>Americano</b><span>7</span></div><div class="it"><b>Cortado</b><span>7</span></div><div class="it"><b>Café crème</b><span>7.5</span></div><div class="it"><b>Cappuccino</b><span>8</span></div><div class="it"><b>Spanish Latte</b><span>8.5</span></div><div class="it"><b>Latte saveur</b><span>9</span><p>Caramel, noisette ou vanille</p></div><div class="it"><b>Latte tiramisu</b><span>12</span></div><div class="it"><b>Mocha blanc</b><span>10</span></div><div class="it"><b>Latte Pistache</b><span>14</span></div><div class="it"><b>Chocolat laitier</b><span>7</span></div><div class="it"><b>Chocolat chaud</b><span>10</span></div><div class="it"><b>Chocolat blanc chaud</b><span>12</span></div><h2>Hot &amp; Cold</h2><div class="it"><b>Affogato classique</b><span>9</span></div><div class="it"><b>Affogato tiramisu</b><span>12.5</span></div><div class="it"><b>Affogato pistache</b><span>14</span></div><div class="it"><b>Choco glacier</b><span>12</span><p>Chocolat chaud, glace vanille</p></div><h2>Nos thés</h2><div class="it"><b>Thé infusion</b><span>8</span><p>Kusmi Tea</p></div><div class="it"><b>Thé glacé pêche</b><span>10</span></div><div class="it"><b>Thé glacé citron</b><span>10</span></div><div class="it"><b>Thé glacé passion</b><span>10</span></div><div class="it"><b>Thé glacé framboise</b><span>10</span></div><h2>Café glacé</h2><div class="it"><b>Americano glacé</b><span>9</span></div><div class="it"><b>Spanish latte glacé</b><span>12</span></div><div class="it"><b>Latte glacé caramel</b><span>13</span></div><div class="it"><b>Latte glacé tiramisu</b><span>14</span></div><div class="it"><b>Latte glacé pistache</b><span>15</span></div><div class="it"><b>Frappé noisette chocolat</b><span>15.5</span></div><div class="it"><b>Frappé caramel</b><span>15</span></div><div class="it"><b>Frappé chocolat blanc</b><span>15.5</span></div><div class="it"><b>Frappé pistache</b><span>16</span></div><h2>Nos matchas</h2><div class="it"><b>Matcha Latte</b><span>9</span></div><div class="it"><b>Matcha chocolat blanc</b><span>12</span></div><div class="it"><b>Matcha latte glacé</b><span>12.5</span></div><div class="it"><b>Matcha fraise glacée</b><span>15</span></div><div class="it"><b>Matcha mangue glacé</b><span>15</span></div><div class="it"><b>Matcha limonade passion</b><span>15</span></div><h2>Milkshake</h2><div class="it"><b>Chocolat-noisette shake</b><span>15</span></div><div class="it"><b>Fraise shake</b><span>15</span></div><div class="it"><b>Mangue shake</b><span>15</span></div><div class="it"><b>Pêche shake</b><span>15</span></div><div class="it"><b>Caramel café shake</b><span>16</span></div><div class="it"><b>Pistache shake</b><span>17</span></div><h2>Jus frais &amp; smoothies</h2><div class="it"><b>Citronnade / Orange</b><span>8</span></div><div class="it"><b>Fraise fraîche</b><span>9</span></div><div class="it"><b>Banane crémeuse</b><span>12</span></div><div class="it"><b>Fraise banane</b><span>14</span></div><div class="it"><b>Datte banane</b><span>14</span></div><div class="it"><b>Mangue banane</b><span>15</span></div><div class="it"><b>Détox verte</b><span>12</span><p>Citronnade, concombre, menthe, basilic, pomme</p></div><div class="it"><b>Détox orangée</b><span>12</span><p>Orange, carotte, gingembre</p></div><div class="it"><b>Coco mangue</b><span>16</span></div><div class="it"><b>Limonade passion</b><span>16</span></div><div class="it"><b>Pina colada</b><span>16</span></div><div class="it"><b>Fruits rouges</b><span>16</span></div><div class="it"><b>Perles tropicale</b><span>17</span><p>Mangue, ananas, perles de fraise</p></div><div class="it"><b>Perles sunset</b><span>17</span><p>Mangue, pêche, perles de fraise</p></div><div class="it"><b>Colada fraise</b><span>17</span></div><h2>Signature</h2><div class="it"><b>Velours d’orge</b><span>13</span><p>Miel, eau, bsissa d’orge, dattes</p></div><div class="it"><b>Nectar d’orge</b><span>15</span><p>Miel, eau, bsissa d’orge, banane</p></div><h2>Mocktails</h2><div class="it"><b>Virgin mojito</b><span>12.5</span></div><div class="it"><b>Mojito mangue</b><span>14</span></div><div class="it"><b>Mojito passion</b><span>14</span></div><div class="it"><b>Mojito ananas basilic</b><span>14.5</span></div><div class="it"><b>Océan bleu</b><span>14</span><p>Blue curaçao, ananas, citron, boisson gazeuse</p></div><div class="it"><b>Limonade à la fraise</b><span>12.5</span></div><div class="it"><b>Diabolo grenadine</b><span>12.5</span></div><div class="it"><b>Glow up</b><span>16.5</span><p>Sirop de grenadine, ananas, boisson énergisante</p></div><h2>Eaux et boissons gazeuses</h2><div class="it"><b>Eau minérale 0,5 L</b><span>3</span></div><div class="it"><b>Eau minérale 0,75 L</b><span>5</span></div><div class="it"><b>Eau gazéifiée 1 L</b><span>5.5</span></div><div class="it"><b>Boisson énergétique</b><span>8</span></div><div class="it"><b>Boissons gazeuses</b><span>5.5</span><p>Coca-Cola, Fanta, Sprite, Boga, Schweppes, Viva, Orangina, Apla…</p></div><h2>Suppléments</h2><div class="it"><b>Verre de lait</b><span>2.5</span></div><div class="it"><b>Arôme / Lait concentré</b><span>2</span></div><div class="it"><b>Lait sans lactose</b><span>2</span></div><div class="it"><b>Lait d’amande ou d’avoine</b><span>3</span></div><div class="it"><b>Shot espresso</b><span>2.5</span></div></section>
+    <p class="foot">L’élégance du goût à chaque bouchée.<small>@maisonnaelsousse</small></p>
+  </div></div></section>
 
-    /* Même animation que les portes */
-    transition: transform 3s cubic-bezier(.77, 0, .18, 1);
-}
-
-.lampe img {
-    position: absolute;
-    top: 0;
-
-    /* Chaque image occupe la largeur complète */
-    width: 200%;
-    height: 100%;
-
-    object-fit: contain;
-    max-width: none;
-}
-
-/* Moitié gauche du lustre */
-.lampe.l img {
-    left: 0;
-}
-
-/* Moitié droite du lustre */
-.lampe.r img {
-    right: 0;
-}
-
-/* Ouverture du lustre */
-#intro.open .lampe.l {
-    transform: translateX(-101%);
-}
-
-#intro.open .lampe.r {
-    transform: translateX(101%);
-}
-@keyframes bow{50%{translate:0 -6px}}
-#intro.open .door.l{transform:translateX(-101%)}#intro.open .door.r{transform:translateX(101%)}
-.ground{position:absolute;left:12%;right:12%;top:calc(50% + 26vh);height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:2;pointer-events:none;transition:opacity .6s}
-#intro .t{position:absolute;left:0;right:0;text-align:center;z-index:2;pointer-events:none;transition:opacity .6s}
-.t.top{top:calc(env(safe-area-inset-top,0px) + 7vh)}.t.top small{letter-spacing:.4em;text-transform:uppercase;font-size:.66rem;color:var(--olive)}
-.t.top h1{font-size:2.8rem;letter-spacing:.04em;margin-top:4px}
-.t.bot{bottom:calc(env(safe-area-inset-bottom,0px) + 6vh);font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--mute);animation:pulse 2s infinite}
-@keyframes pulse{50%{opacity:.3}}
-#intro.open .t,#intro.open .ground {opacity:0}#intro.gone{display:none}
-/* HEADER */
-header{padding:70px 24px 10px;position:relative}
-header .pill{display:inline-block;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;border:1px solid var(--ink);border-radius:99px;padding:6px 14px}
-header h1{font-size:3.6rem;line-height:.95;margin:22px 0 10px;letter-spacing:-.01em}
-header h1 i{color:var(--gold);font-weight:500}
-header p{color:var(--mute);max-width:260px;line-height:1.5;font-size:.95rem}
-nav{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 12px);transform:translate(-50%,-90px);z-index:30;max-width:calc(100% - 24px);background:#23211cee;backdrop-filter:blur(12px);border-radius:99px;padding:5px;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;transition:transform .6s cubic-bezier(.2,1.2,.4,1);box-shadow:0 12px 30px #0003}
-nav.show{transform:translate(-50%,0)}nav::-webkit-scrollbar{display:none}
-nav a{flex:none;text-decoration:none;color:#f8f3e9aa;font-size:.74rem;padding:9px 15px;border-radius:99px;transition:.35s;white-space:nowrap}
-nav a.on{background:var(--gold);color:#fff}
-section{padding-top:64px}
-.sh{padding:0 24px;display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
-.sh h2{font-size:2.5rem;line-height:1}
-.sh h2 small{display:block;font-family:Jost;font-weight:300;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--olive);margin-bottom:8px}
-.num{font-family:'Cormorant Garamond',serif;font-size:4.6rem;line-height:.8;color:transparent;-webkit-text-stroke:1px var(--gold);opacity:.7}
-.row{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 24px 26px;scrollbar-width:none}
-.row::-webkit-scrollbar{display:none}
-.card{flex:none;width:74vw;max-width:330px;aspect-ratio:4/5.4;scroll-snap-align:center;position:relative;border-radius:34px;overflow:hidden;background:var(--c);box-shadow:0 22px 40px -18px #3a2d0f55;opacity:0;transform:translateX(40px) scale(.94);transition:opacity .8s,transform .9s cubic-bezier(.2,.9,.3,1)}
-.card.in{opacity:1;transform:none}
-.img{position:absolute;inset:0;background:radial-gradient(120% 80% at 20% 10%,#fff9,transparent 55%),radial-gradient(90% 70% at 90% 100%,var(--d),transparent 70%),var(--c);background-size:cover;background-position:center;transition:transform 1.2s}
-.card:active .img{transform:scale(1.06)}
-.ini{position:absolute;right:-6%;top:6%;font-family:'Cormorant Garamond',serif;font-size:14rem;line-height:.8;color:#fff;opacity:.35;font-weight:600;pointer-events:none}
-.has .ini{display:none}
-.card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,#1c1a16d9);pointer-events:none}
-.top{position:absolute;top:16px;left:16px;right:16px;display:flex;justify-content:space-between;z-index:2}
-.tag{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;background:#fffdf8d9;backdrop-filter:blur(8px);padding:7px 12px;border-radius:99px}
-.pr{margin-left:auto;font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;background:var(--gold);color:#fff;padding:5px 14px;border-radius:99px}
-.info{position:absolute;left:20px;right:20px;bottom:20px;color:#fff;z-index:2}
-.info h3{font-size:1.9rem;line-height:1;margin-bottom:8px}
-.info p{font-size:.82rem;line-height:1.45;opacity:.85}
-.pair{margin-top:12px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#ecd08a}
-.cnt{padding:0 24px;font-size:.7rem;letter-spacing:.25em;color:var(--mute);margin-top:-8px}
-footer{text-align:center;padding:50px 20px 60px;color:var(--mute);font-size:.8rem}
-footer .serif{font-size:1.6rem;font-style:italic;color:var(--ink);line-height:1.2}
-</style></head><body>
-<div id="intro">
-
-    <!-- Lustre divisé en deux parties -->
-    <div class="lampes">
-        <div class="lampe l">
-            <img src="./images/lampes.png" alt="">
-        </div>
-
-        <div class="lampe r">
-            <img src="./images/lampes.png" alt="">
-        </div>
-    </div>
-
-    <!-- Monsieur Naël à gauche -->
-<div class="door l">
-    <img src="./images/monsieurNael.png"
-         alt="Monsieur Naël"
-         loading="lazy">
-</div>
-
-<!-- Madame Naël à droite -->
-<div class="door r">
-    <img src="./images/madameNael.png"
-         alt="Madame Naël"
-         loading="lazy">
-</div>
-    <div class="ground"></div>
-
-    <div class="t bot">Touchez pour entrer</div>
-
-</div>
-<header><span class="pill">Sousse</span><h1 class="serif">Maison<br><i>Naël</i></h1><p>Café, viennoiseries &amp; douceurs. Prenez place, le moment est à vous.</p></header>
-<nav id="nav"></nav>
-<main id="menu"></main>
-<footer><div class="serif">Monsieur &amp; Madame Naël<br>vous souhaitent un délicieux moment</div><p style="margin-top:10px">Prix en dinars tunisiens (DT)</p></footer>
+  <div class="door l"><i></i></div>
+  <div class="door r"><i></i></div>
+  <div class="glow"></div>
+  <img src="./images/lampes.png" class="lamp" id="lp" alt="Lampes suspendues">
+  <img src="./images/monsieurNael.png" class="fig mo" id="mo" alt="Monsieur Naël">
+  <img src="./images/madameNael.png" class="fig ma" id="ma" alt="Madame Naël">
+  <button class="enter" id="btn" type="button">Entrer</button>
+</main>
 <script>
-var PHOTOS={"Espresso":"./espresso.png","Iced latte":"./icedLatte.png" , "Croissant beurre" : "./croissant.png"};/* nom du produit -> photo (data URI) */
-var D=[
-{id:"chauds",t:"Cafés chauds",s:"Torréfiés avec soin",c:"#e2cfa6",d:"#b98a2a66",i:[
-["Espresso","Court, intense et soyeux, une crème dorée.","Avec un croissant beurre",3.5],["Café crème","Onctueux, doux, mousse de lait fine.","Avec un pain aux raisins",5,"Favori"],["Cappuccino","Mousse veloutée, voile de cacao.","Avec un chausson aux pommes",6.5],["Latte vanille","Lait fondant, vanille de Madagascar.","Avec un éclair café",7.5]]},
-{id:"froids",t:"Cafés froids",s:"Fraîcheur et caractère",c:"#cfd6b0",d:"#7a845899",i:[
-["Iced latte","Espresso, lait froid et glaçons cristallins.","Avec un pain au chocolat",8],["Cold brew","Infusé à froid pendant 18 heures.","Avec un mille-feuille",8.5,"Nouveau"],["Frappé caramel","Crémeux, nappage caramel beurre salé.","Avec une crêpe sucrée",9.5],["Affogato","Glace vanille noyée d’espresso chaud.","Seul, en toute élégance",9]]},
-{id:"cocktails",t:"Cocktails",s:"Sans alcool, tout en élégance",c:"#ebcf80",d:"#b98a2a99",i:[
-["Mojito citron vert","Menthe fraîche, citron vert, pétillant.","Avec une tarte citron",10],["Spritz agrumes","Orange sanguine, romarin, bulles fines.","Avec un croissant",11,"Signature"],["Fruits rouges","Fraise, framboise et basilic frais.","Avec un éclair",10.5],["Passion mangue","Fruit de la passion, mangue mûre.","Avec une crêpe",11]]},
-{id:"viennoiseries",t:"Viennoiseries",s:"Pétries et dorées chaque matin",c:"#ecd9b6",d:"#c9992b77",i:[
-["Croissant beurre","Feuilleté, doré, au beurre pur.","Avec un café crème",3.5,"Favori"],["Pain au chocolat","Deux barres de chocolat noir.","Avec un cappuccino",4],["Chausson aux pommes","Compote maison, croûte croustillante.","Avec un espresso",4.5],["Pain aux raisins","Crème pâtissière et raisins gorgés.","Avec un latte vanille",4.5]]},
-{id:"douceurs",t:"Douceurs",s:"Pour finir en beauté",c:"#d6dcb9",d:"#7a845888",i:[
-["Éclair café","Crème légère, glaçage brillant.","Avec un espresso",6],["Tarte citron","Meringue dorée au chalumeau.","Avec un mojito",7.5],["Mille-feuille","Vanille de Madagascar, feuilletage fin.","Avec un cold brew",8],["Crêpe sucrée","Chocolat ou caramel beurre salé.","Avec un frappé",9]]}];
-var n='',h='';
-D.forEach(function(c,ci){n+='<a href="#'+c.id+'">'+c.t+'</a>';
-h+='<section id="'+c.id+'"><div class="sh"><h2><small>'+c.s+'</small>'+c.t+'</h2><div class="num">0'+(ci+1)+'</div></div><div class="row" style="--c:'+c.c+';--d:'+c.d+'">';
-c.i.forEach(function(p){var ph=PHOTOS[p[0]];h+='<div class="card'+(ph?' has':'')+'"><div class="img"'+(ph?' style="background-image:url('+ph+')"':'')+'></div><div class="ini">'+p[0][0]+'</div><div class="top">'+(p[4]?'<span class="tag">'+p[4]+'</span>':'')+'<span class="pr">'+p[3].toFixed(1)+'</span></div><div class="info"><h3 class="serif">'+p[0]+'</h3><p>'+p[1]+'</p><div class="pair">'+p[2]+'</div></div></div>'});
-h+='</div><div class="cnt">GLISSEZ →</div></section>'});
-var nav=document.getElementById('nav');nav.innerHTML=n;document.getElementById('menu').innerHTML=h;
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.2});
-document.querySelectorAll('.card').forEach(function(x){io.observe(x)});
-var links=nav.querySelectorAll('a'),so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')=='#'+e.target.id)});var a=nav.querySelector('.on');if(a)nav.scrollTo({left:a.offsetLeft-40,behavior:'smooth'})}})},{rootMargin:'-30% 0px -60% 0px'});
-document.querySelectorAll('section').forEach(function(s){so.observe(s)});
-addEventListener('scroll',function(){nav.classList.toggle('show',scrollY>380)},{passive:true});
-var it=document.getElementById('intro'),done=false;
-function openIt(){if(done)return;done=true;it.classList.add('open');setTimeout(function(){it.classList.add('gone')},1600)}
-it.onclick=openIt;setTimeout(openIt,4000);
-</script></body></html>
+(function(){
+  var st=document.getElementById('st'),done=false;
+  function openDoors(){
+    if(done)return;done=true;
+    st.classList.add('open');
+    setTimeout(function(){
+      document.querySelectorAll('.door,.glow,#lp,#btn').forEach(function(d){d.style.display='none'});
+    },2900);
+  }
+  document.getElementById('btn').addEventListener('click',function(e){e.stopPropagation();openDoors()});
+  st.addEventListener('click',openDoors);
+  var tabs=document.querySelectorAll('.tabs button');
+  tabs.forEach(function(b){b.addEventListener('click',function(){
+    tabs.forEach(function(x){x.setAttribute('aria-selected',x===b)});
+    document.querySelectorAll('.panel').forEach(function(p){p.hidden=p.id!=='p-'+b.dataset.t});
+    document.getElementById('mn').scrollTop=0;
+  })});
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setTimeout(openDoors,reduce?800:5000);
+})();
+</script>
+</body>
+</html>
